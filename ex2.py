@@ -3,17 +3,6 @@ import os
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-#Para testes rápidos, descomente esse grafo abaixo
-# grafo = {
-#     "vertices": ["A", "B", "C", "D"],
-#     "matriz": [
-#         [0, 1, 0, 0],
-#         [0, 0, 1, 1],
-#         [1, 0, 0, 0],
-#         [0, 0, 1, 0]
-#     ]
-# }
-
 #Cria um grafo vazio para ser alimentado pelas outras funções
 def criarGrafo():
   return {
@@ -26,7 +15,7 @@ def imprimirGrafo(grafo):
   vertices = grafo["vertices"]
   matriz = grafo["matriz"]
 
-  print("   ", end="")#deixa um espacinho pra primeira célula
+  print("   ", end="")#deixa um espacinho para a primeira célula
 
   for c in range(len(vertices)):
     print(vertices[c], end="  ")#coloco todos os vértices na horizontal
@@ -63,9 +52,11 @@ def inserirAresta(grafo, origem, destino, direcionado):
   vertices = grafo["vertices"]
   matriz = grafo["matriz"]
 
-  if origem not in vertices or destino not in vertices:
-    print("Tente novamente, 1 ou ambos vértices não existem")
-    return
+  if origem not in grafo["vertices"]:
+    inserirVertice(grafo, origem)
+
+  if destino not in grafo["vertices"]:
+    inserirVertice(grafo, destino)
 
   i = vertices.index(origem)
   j = vertices.index(destino)
@@ -143,7 +134,7 @@ def verificaArestaExistente(grafo, origem, destino):
 
   if origem not in vertices or destino not in vertices:
     print("Tente novamente, 1 ou ambos os vértices não existem")
-    return
+    return False
 
   origemIndice = vertices.index(origem)
   destinoIndice = vertices.index(destino)
@@ -187,36 +178,6 @@ def verificarPercurso(grafo, percurso):
       return False
 
   return True
-
-# inserirVertice(grafo, "E")
-# inserirAresta(grafo, "A", "E", False)
-# imprimirGrafo(grafo)
-# print()
-
-# removerAresta(grafo, "A", "E", False)
-# imprimirGrafo(grafo)
-
-# removerVertice(grafo, "C")
-# imprimirGrafo(grafo)
-
-# calcularGrauDirecionado(grafo)
-
-# calcularGrauDirecionado(grafo)
-
-# existe = verificarAresta(grafo, "A", "B")
-# if existe:
-#   print("Aresta existe")
-# else:
-#   print("Aresta NÂO existe")
-
-# verificarVizinhos(grafo, "A")
-
-# percurso = ["A", "B", "C"]
-# res = verificarPercurso(grafo, percurso)
-# if res:
-#   print("Percurso válido")
-# else:
-#   print("Percurso Inválido")
 
 #Menu do programa
 def menu():
